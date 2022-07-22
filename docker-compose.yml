@@ -3,13 +3,13 @@
 version: '3'
 services:
   db:
-    image: "postgres"
+    image: "postgres" # You can use tag here like postgres:11.1 or postgres:latest
     environment: 
       POSTGRES_USER: postgres_user
       POSTGRES_PASSWORD: postgres_password
       POSTGRES_DB: postgres_db
-    # volumes:
-    #   - db-data:/example
+    volumes:
+      - db-data:/example
 
   web:
     # You can use name of an image or build it 
@@ -22,5 +22,5 @@ services:
     ports:
       - "8080:8080"
 
-# volumes:
-#   db-data:
+volumes:
+  db-data: 
