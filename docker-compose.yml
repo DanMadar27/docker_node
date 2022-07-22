@@ -22,5 +22,7 @@ services:
     ports:
       - "8080:8080"
 
+    restart: on-failure:5 # This will restart on failure max 5 times. can be also no, always, unless-stopped
+
 volumes:
   db-data: 
