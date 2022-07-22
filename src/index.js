@@ -1,9 +1,19 @@
+const config = require('./config');
+
 const app = require('express')();
+const db = require('./db');
 
-app.get('/', (req, res ) => 
-  res.json({ message: 'Welcome' }) 
-);
+const routes = require('./routes');
 
-const port = process.env.PORT || 8080;
 
-app.listen(port, () => console.log(`app listening on http://localhost:${port}`) );
+function start(app) {
+  console.log('starting server');
+
+  // maybe need await here
+  db.init();
+  routes.init(app);
+
+  console.log(`app listening on http://localhost:${config.APP_PORT}`)   
+}
+
+app.listen(config.APP_PORT, () => start(app));

@@ -5,9 +5,13 @@ services:
   db:
     image: "postgres" # You can use tag here like postgres:11.1 or postgres:latest
     environment: 
-      POSTGRES_USER: postgres_user
-      POSTGRES_PASSWORD: postgres_password
-      POSTGRES_DB: postgres_db
+      POSTGRES_USER: postgres_user # You can use any name for user
+      POSTGRES_PASSWORD: postgres_password # You can use any password for user
+      POSTGRES_DB: postgres_db # Will create
+
+    ports:
+      - "5432:5432"
+
     volumes:
       - db-data:/example_data # This will mount the volume db-data to /example_data folder in the container db
 
@@ -17,12 +21,21 @@ services:
     # image: docker_node
     build: . # Build from Dockerile in current directory
 
+    environment:
+      NODE_ENV: production
+      APP_PORT: 8080
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: postgres_user
+      DB_PASSWORD: postgres_password
+      DB_NAME: postgres_db
+      
     depends_on:
       - db
     ports:
       - "8080:8080"
 
-    restart: on-failure:5 # This will restart on failure max 5 times. can be also no, always, unless-stopped
+    restart: on-failure:5 # This will restart on failure max 5 times(times is optional). can be also no, always, unless-stopped
 
 volumes:
   db-data: 
