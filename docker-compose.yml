@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: postgres_password
       POSTGRES_DB: postgres_db
     volumes:
-      - db-data:/example
+      - db-data:/example_data # This will mount the volume db-data to /example_data folder in the container db
 
   web:
     # You can use name of an image or build it 
