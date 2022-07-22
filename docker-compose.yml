@@ -1,17 +1,26 @@
 # Example of configuration for compose with shared volumes.
 
-# version: '3'
-# services:
-#   web:
-#     build: .
-#     ports:
-#       - "8080:8080"
-#   db:
-#     image: "mysql"
-#     environment: 
-#       MYSQL_PASSWORD: password
-#     volumes:
-#       - db-data:/example
+version: '3'
+services:
+  db:
+    image: "postgres"
+    environment: 
+      POSTGRES_USER: postgres_user
+      POSTGRES_PASSWORD: postgres_password
+      POSTGRES_DB: postgres_db
+    # volumes:
+    #   - db-data:/example
+
+  web:
+    # You can use name of an image or build it 
+    
+    # image: docker_node
+    build: . # Build from Dockerile in current directory
+
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
 
 # volumes:
 #   db-data:
