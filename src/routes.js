@@ -8,7 +8,6 @@ function init(app) {
   app.get('/counters', counters.getCounters);
 }
 
-
 module.exports = {
   init,
 };

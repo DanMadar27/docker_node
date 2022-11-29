@@ -11,55 +11,48 @@ const pool = new Pool({
   port: config.DB_PORT,
 });
 
-function init() {
-  console.log('initializing db');
+async function init() {
+  try {
+    console.log('initializing db');
+    
+    await createCountersTable();
+    await createCounterRow('counter');  
 
-  createCountersTable();
-  createCounterRow('counter');  
+    console.log('db initialized');
 
-  console.log('db initialized');
+    return true;
+  }
+  catch(err) {
+    console.error(err.stack);
+
+    return false;
+  }
 }
 
 function getPool() {
   return pool;
 }
 
-function createCountersTable() {
+async function createCountersTable() {
   // create table if it doesn't exist
-  pool.query(`
+  return pool.query(`
     CREATE TABLE IF NOT EXISTS counters (
       id SERIAL PRIMARY KEY,
       name VARCHAR(255) NOT NULL,
       value INTEGER NOT NULL DEFAULT 0
     )
-  `, (err, res) => {
-    if (err) {
-      console.log(err.stack);
-    }
-  }
-  );
+  `);
 }
 
-function createCounterRow(name) {
+async function createCounterRow(name) {
   // create row if it doesn't exist
-  pool.query(`
-  SELECT * FROM counters WHERE name = 'counter'
-  `, (err, res) => {
-  if(err) {
-    console.log(err.stack);
-  }
-  if(res.rows.length === 0) {
-    pool.query(`
-      INSERT INTO counters (name, value) VALUES ('counter', 0)
-    `, (err, res) => {
-      if(err) {
-        console.log(err.stack);
-      }
-    }
-    );
-  }
-  }
-  );
+  return pool.query(`
+    INSERT INTO counters (name)
+    SELECT CAST($1 AS VARCHAR)
+    WHERE NOT EXISTS (
+      SELECT 1 FROM counters WHERE name = CAST($1 AS VARCHAR)
+    )
+  `, [name]);
 }
 
 module.exports = {

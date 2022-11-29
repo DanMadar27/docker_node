@@ -10,7 +10,9 @@ async function getCounters(req, res) {
   try {
     const counters = (await get()).rows;
 
-    increaseValue(counters[0].id);
+    if(counters.length && counters[0].id) {
+      increaseValue(counters[0].id);
+    }
 
     res.json(counters);
   }
