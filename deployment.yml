@@ -1,7 +1,3 @@
-# error is that can't pull image, so I will fix this by pulling the node image from my docker hub
-# db will pull from oficiall
-# could not solve this
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -19,7 +15,7 @@ spec:
       containers:
       - name: myapp
         image: danmadar/node_web:latest
-        imagePullPolicy: Never # Will not download te image
+        imagePullPolicy: Never # Will not download the image
         resources:
           limits:
             memory: "512Mi"
