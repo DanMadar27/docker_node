@@ -10,7 +10,8 @@ async function start(app) {
   console.log('starting server');
 
   if(!(await db.init())) {
-    console.log('failed to initialize db');
+    console.error('failed to initialize db');
+    return;
   }
   
   routes.init(app);
