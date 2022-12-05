@@ -45,8 +45,8 @@ spec:
   selector:
     app: db
   ports:
-  - port: 5432
-    targetPort: 5432
+    - port: 5432
+      targetPort: 5432
 
 ---
 
@@ -64,6 +64,11 @@ spec:
       labels:
         app: myapp
     spec:
+      initContainers:
+        # container that wait for db service to be created
+        - name: wait-for-db
+          image: busybox:latest # For linux commands
+          command: ['sh', '-c', 'sleep 5']
       containers:
       - name: myapp
         image: danmadar/node_web:latest
@@ -79,7 +84,7 @@ spec:
         - name: DB_HOST
           value: db
 
-        - name: DB_PORT
+        - name: DB_APP_PORT
           value: "5432"
 
         - name: DB_USER
@@ -109,7 +114,7 @@ spec:
   selector:
     app: myapp
   ports:
-  - port: 80
-    targetPort: 8080
+    - port: 80
+      targetPort: 8080
 
 # later add volumes and use the same data of the db
