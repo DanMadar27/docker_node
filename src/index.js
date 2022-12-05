@@ -11,7 +11,6 @@ async function start(app) {
 
   if(!(await db.init())) {
     console.log('failed to initialize db');
-    return;
   }
   
   routes.init(app);
