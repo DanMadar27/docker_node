@@ -7,6 +7,8 @@ async function get() {
 }
 
 async function getCounters(req, res) {
+  console.log('get /counters');
+
   try {
     const counters = (await get()).rows;
 

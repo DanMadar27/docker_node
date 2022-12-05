@@ -10,6 +10,8 @@ Run ```npm install``` and build the images using ```docker compose up -d --build
 Make sure to start minikube if running on localhost using ```minikube start```.
 
 run ```kubectl apply -f ./deployment.yml``` and ```kubectl delete -f ./deployment.yml``` to apply or delete deployment.
+run```minikube service myapp``` to run the service.
+
 ### Kubernetes Commands
 
 Use ```kubectl get pods``` to see pods.
