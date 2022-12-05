@@ -68,7 +68,7 @@ spec:
         # container that wait for db service to be created
         - name: wait-for-db
           image: busybox:latest # For linux commands
-          command: ['sh', '-c', 'sleep 5']
+          command: ['sh', '-c', 'until nslookup db; do echo waiting for db; sleep 2; done']
       containers:
       - name: myapp
         image: danmadar/node_web:latest
