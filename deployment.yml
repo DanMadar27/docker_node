@@ -39,8 +39,9 @@ spec:
         ports:
         - containerPort: 5432
 
+        # using volumes to store db data in volumes to make the data independent of the db container
         volumeMounts:
-          - mountPath: "/data/init" # location to mount in this container
+          - mountPath: "/var/lib/postgresql/data" # location to mount in this container (get data from pvc and also store it in the pvc)
             name: pv-storage
 
 ---
@@ -75,7 +76,7 @@ spec:
         # container that wait for db service to be created
         - name: wait-for-db
           image: busybox:latest # For linux commands
-          command: ['sh', '-c', 'until nslookup db; do echo waiting for db; sleep 2; done']
+          command: ['sh', '-c', 'sleep 10']
       containers:
       - name: myapp
         image: danmadar/node_web:latest

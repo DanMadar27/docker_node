@@ -10,6 +10,8 @@ Run ```npm install``` and build the images using ```docker compose up -d --build
 Make sure to start minikube if running on localhost using ```minikube start```.
 
 Run ```kubectl apply -f ./volumes.yml``` to create the volumes.
+In order to delete volumes, enter "Docker Desktop" -> volumes -> minikube -> cli -> cd mnt/data and delete the data using rm command.
+
 Run ```kubectl apply -f ./deployment.yml``` and ```kubectl delete -f ./deployment.yml``` to apply or delete deployment.
 To recreate a deployment just use delete and then apply the deployment again.
 Run```minikube service myapp``` to run the service.
