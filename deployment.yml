@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: db
 spec:
-  # replicas: 2 Kubernetes object that ensures there is always a stable set of running pods for a specific workload
+  replicas: 2 # Kubernetes object that ensures there is always a stable set of running pods for a specific workload
   selector:
     matchLabels:
       app: db
@@ -63,7 +63,7 @@ kind: Deployment
 metadata:
   name: myapp
 spec:
-  # replicas: 2 # Kubernetes object that ensures there is always a stable set of running pods for a specific workload
+  replicas: 2 # Kubernetes object that ensures there is always a stable set of running pods for a specific workload
   selector:
     matchLabels: # Use these labels to find in selector
       app: myapp
