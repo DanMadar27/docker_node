@@ -12,6 +12,11 @@ spec:
       labels:
         app: db
     spec:
+      volumes:
+        - name: pv-storage
+          persistentVolumeClaim:
+            claimName: pv-claim # name of the persistant volume claim
+
       containers:
       - name: db
         image: postgres:latest
@@ -34,8 +39,11 @@ spec:
         ports:
         - containerPort: 5432
 
----
+        volumeMounts:
+          - mountPath: "/data/init" # location to mount in this container
+            name: pv-storage
 
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -49,7 +57,6 @@ spec:
       targetPort: 5432
 
 ---
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -104,7 +111,6 @@ spec:
         - containerPort: 8080
 
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
@@ -116,5 +122,3 @@ spec:
   ports:
     - port: 80
       targetPort: 8080
-
-# later add volumes and use the same data of the db
