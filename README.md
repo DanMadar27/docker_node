@@ -27,6 +27,7 @@ Use ```minikube addons configure registry-creds``` to add credentials to minikub
 Use ```kubectl get pods``` to see pods.
 Use ```kubectl.exe get svc``` to see services to access the nodes.
 Use ```kubectl logs <pod>``` to see logs about a pod.
+Use ```kubectl logs <pod-name> -c <init-container-name>``` to see logs about init container in pod.
 Use ```kubectl.exe get deployments``` to see deployments.
 
 Use ```kubectl get pv``` to show information about persistant volumes.
