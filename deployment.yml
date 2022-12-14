@@ -24,13 +24,25 @@ spec:
 
         env: 
         - name: POSTGRES_USER
-          value: postgres_user
+          valueFrom:
+            secretKeyRef:
+              name: mysecret
+              key: DB_USER
+              optional: false # same as default; "mysecret" must exist and include a key named "DB_USER"
 
         - name: POSTGRES_PASSWORD
-          value: postgres_password
+          valueFrom:
+            secretKeyRef:
+              name: mysecret
+              key: DB_PASSWORD
+              optional: false
 
         - name: POSTGRES_DB
-          value: postgres_db
+          valueFrom:
+            secretKeyRef:
+              name: mysecret
+              key: DB_NAME
+              optional: false
 
         resources:
           limits:
@@ -82,6 +94,7 @@ spec:
         image: danmadar/node_web:latest
         imagePullPolicy: Never # Will not download the image
 
+        # you can use envFrom secret to store all key-value pairs like in Secret.
         env: 
         - name: NODE_ENV
           value: production
@@ -96,13 +109,25 @@ spec:
           value: "5432"
 
         - name: DB_USER
-          value: postgres_user
+          valueFrom:
+            secretKeyRef:
+              name: mysecret
+              key: DB_USER
+              optional: false
 
         - name: DB_PASSWORD
-          value: postgres_password
+          valueFrom:
+            secretKeyRef:
+              name: mysecret
+              key: DB_PASSWORD
+              optional: false
 
         - name: DB_NAME
-          value: postgres_db
+          valueFrom:
+            secretKeyRef:
+              name: mysecret
+              key: DB_NAME
+              optional: false
 
         resources:
           limits:

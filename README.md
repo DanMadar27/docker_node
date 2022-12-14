@@ -5,22 +5,30 @@ Example of how to setup Docker container with a node app.
 
 ## Getting Started
 
+### Docker Compose
 Run ```npm install``` and build the images using ```docker compose up -d --build```.
 
+### Kubernetes
+
 Make sure to start minikube if running on localhost using ```minikube start```.
+
+Run ```kubectl apply -f ./secret.yml``` to create the secret.
+Run ```kubectl delete -f ./secret.yml``` to delete the secret.
+You can also view secrets in vscode using the Kubernetes extension (in configuration section).
 
 Run ```kubectl apply -f ./volumes.yml``` to create the volumes.
 In order to delete volumes, enter "Docker Desktop" -> volumes -> minikube -> cli -> cd mnt/data and delete the data using rm command.
 
 Run ```kubectl apply -f ./deployment.yml``` and ```kubectl delete -f ./deployment.yml``` to apply or delete deployment.
 To recreate a deployment just use delete and then apply the deployment again.
+
 Run```minikube service myapp``` to run the service.
 
 You can use Kubernetes extension in vscode to see the running pods and volumes in storage in minikube.
 
 See ```/counters``` path to see information from db.
 
-### Kubernetes Commands
+## Kubernetes Commands
 
 Use ```minikube addons configure registry-creds``` to add credentials to minikube for pulling images from container registries.
 
