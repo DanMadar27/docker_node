@@ -1,7 +1,6 @@
 # docker_node
 
-
-Example of how to setup Docker container with a node app.
+Example of how to setup Docker container or Kubernetes cluster with a Node JS app with Posgres DB.
 
 ## Getting Started
 
@@ -10,7 +9,9 @@ Run ```npm install``` and build the images using ```docker compose up -d --build
 
 ### Kubernetes
 
-Make sure to start minikube if running on localhost using ```minikube start```.
+Make sure to start minikube if running on localhost using ```minikube start```. You need to run Docker Desktop first.
+
+Run ```minikube mount .:/var/lib/minikube/certs/hack``` and then run ```minikube start --extra-config=apiserver.encryption-provider-config=/var/lib/minikube/certs/hack/encryption.yml```.
 
 Run ```kubectl apply -f ./secret.yml``` to create the secret.
 Run ```kubectl delete -f ./secret.yml``` to delete the secret.
@@ -21,6 +22,8 @@ In order to delete volumes, enter "Docker Desktop" -> volumes -> minikube -> cli
 
 Run ```kubectl apply -f ./deployment.yml``` and ```kubectl delete -f ./deployment.yml``` to apply or delete deployment.
 To recreate a deployment just use delete and then apply the deployment again.
+
+If getting error ImagePullError then need to build images on minikube container. Open minikube in terminal and build the images (using the mount).
 
 Run```minikube service myapp``` to run the service.
 

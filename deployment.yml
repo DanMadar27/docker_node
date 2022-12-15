@@ -23,6 +23,13 @@ spec:
         imagePullPolicy: Never
 
         env: 
+        - name: POSTGRES_DB
+          valueFrom:
+            secretKeyRef:
+              name: mysecret
+              key: DB_NAME
+              optional: false
+
         - name: POSTGRES_USER
           valueFrom:
             secretKeyRef:
@@ -35,13 +42,6 @@ spec:
             secretKeyRef:
               name: mysecret
               key: DB_PASSWORD
-              optional: false
-
-        - name: POSTGRES_DB
-          valueFrom:
-            secretKeyRef:
-              name: mysecret
-              key: DB_NAME
               optional: false
 
         resources:
