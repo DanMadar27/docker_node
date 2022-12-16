@@ -11,7 +11,7 @@ Run ```npm install``` and build the images using ```docker compose up -d --build
 
 Make sure to start minikube if running on localhost using ```minikube start```. You need to run Docker Desktop first.
 
-Run ```minikube mount .:/var/lib/minikube/certs/hack``` and then run ```minikube start --extra-config=apiserver.encryption-provider-config=/var/lib/minikube/certs/hack/encryption.yml```.
+In order to encrypt secrets ad REST then ```minikube mount .:/var/lib/minikube/certs/hack``` and then run ```minikube start --extra-config=apiserver.encryption-provider-config=/var/lib/minikube/certs/hack/encryption.yml```.
 
 Run ```kubectl apply -f ./secret.yml``` to create the secret.
 Run ```kubectl delete -f ./secret.yml``` to delete the secret.
