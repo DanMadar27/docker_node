@@ -23,7 +23,7 @@ In order to delete volumes, enter "Docker Desktop" -> volumes -> minikube -> cli
 Run ```kubectl apply -f ./deployment.yml``` and ```kubectl delete -f ./deployment.yml``` to apply or delete deployment.
 To recreate a deployment just use delete and then apply the deployment again.
 
-If getting error ImagePullError then need to build images on minikube container. Open minikube in terminal and build the images (using the mount).
+**Note -** If getting error **ImagePullError** then need to build images on minikube container. Open minikube in terminal and build the images (using mount) or configure current terminal to use environment variables of minikube and then run docker build commnad (use ```eval $(minikube docker-env)``` in linux or use ```minikube docker-env | Invoke-Expression``` in Windows powershell).
 
 Run```minikube service myapp``` to run the service.
 
