@@ -20,7 +20,7 @@ spec:
       containers:
       - name: db
         image: postgres:latest
-        imagePullPolicy: Never
+        imagePullPolicy: IfNotPresent
 
         env: 
         - name: POSTGRES_DB
