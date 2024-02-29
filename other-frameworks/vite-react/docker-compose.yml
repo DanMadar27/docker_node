@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+    frontend:
+        image: frontend:latest
+        ports:
+            - '80:80'
+        depends_on:
+            - backend
+
+    backend:
+        image: backend:latest
+        environment:
+            - VAR1=value
+            - VAR2=value
